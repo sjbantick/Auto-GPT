@@ -1,0 +1,4 @@
+# This file marks the boundary of the autoresearch framework.
+# The agent must NEVER modify files outside the editable scope:
+#   strategies/  features/  research_configs/  scoring/
+# This file itself is forbidden from modification.

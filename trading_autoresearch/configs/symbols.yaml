@@ -1,0 +1,10 @@
+universe:
+  tier_1:
+    - "BTC/USDT"
+    - "ETH/USDT"
+  tier_2:
+    - "SOL/USDT"
+    - "BNB/USDT"
+    - "ADA/USDT"
+  excluded:
+    - "LUNA/USDT"

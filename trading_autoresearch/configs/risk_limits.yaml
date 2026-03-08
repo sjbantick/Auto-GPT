@@ -1,0 +1,64 @@
+# Hard risk limits — loaded by scorecard and promotion manager
+
+hard_limits:
+  max_position_size_usd: 100
+  max_daily_loss_usd: 50
+  max_drawdown_pct: 0.20
+  max_leverage: 1.0
+
+scorecard_thresholds:
+  min_trades: 30
+  min_profit_factor: 1.05
+  min_net_expectancy: 0.0
+  max_drawdown_regression_factor: 1.10
+  min_trade_count_ratio: 0.80
+  min_oos_positive_window_pct: 0.50
+  min_oos_sharpe_ratio: 0.90
+  max_top_day_pnl_concentration: 0.25
+  max_top_5_trades_pnl_concentration: 0.40
+  min_slippage_stress_ratio: 0.70
+  max_fee_drag_pct: 0.50
+  max_per_symbol_sharpe_std: 1.5
+  max_complexity_delta: 1.0
+  min_worst_regime_sharpe: -0.5
+
+fast_screen:
+  min_trades: 10
+  min_expectancy: 0.0
+  min_profit_factor: 1.0
+  max_drawdown_pct: 0.30
+  min_sharpe: 0.0
+
+costs:
+  fee_pct: 0.001
+  slippage_pct: 0.0005
+  slippage_stress_pct: 0.001
+
+promotion:
+  paper_gate:
+    min_paper_trades: 100
+    min_fee_adjusted_pf: 1.05
+    max_worst_symbol_drawdown: 0.15
+    max_infra_exceptions: 5
+    min_duration_days: 14
+
+  probation_entry:
+    min_paper_duration_days: 30
+    min_latency_adjusted_sharpe: 0.0
+    max_position_size_usd: 100
+    max_loss_usd: 50
+    probation_duration_days: 14
+
+  approval:
+    min_probation_duration_days: 14
+    max_drawdown_pct: 0.20
+    max_order_reject_rate: 0.05
+    max_slippage_bps: 15.0
+    max_infra_exceptions: 3
+
+  demotion_triggers:
+    max_loss_usd: 50
+    max_drawdown_pct: 0.20
+    max_infra_exceptions: 10
+    max_order_reject_rate: 0.10
+    max_slippage_bps: 25.0

@@ -1,0 +1,108 @@
+# Strategy parameter search space
+# The agent uses this to understand what is safe to propose.
+# Hard limits constrain acceptable values.
+
+search_space:
+  entry_signals:
+    rsi_period:
+      type: int
+      min: 7
+      max: 28
+      default: 14
+      description: "RSI lookback period"
+
+    rsi_oversold:
+      type: float
+      min: 20.0
+      max: 40.0
+      default: 30.0
+
+    rsi_overbought:
+      type: float
+      min: 60.0
+      max: 80.0
+      default: 70.0
+
+    ema_fast:
+      type: int
+      min: 5
+      max: 50
+      default: 12
+
+    ema_slow:
+      type: int
+      min: 20
+      max: 200
+      default: 26
+
+    volume_filter_multiplier:
+      type: float
+      min: 1.0
+      max: 3.0
+      default: 1.5
+      description: "Volume must be N x average to confirm signal"
+
+  exit_signals:
+    atr_sl_multiplier:
+      type: float
+      min: 1.0
+      max: 4.0
+      default: 2.0
+      description: "Stop loss = ATR * multiplier"
+
+    atr_tp_multiplier:
+      type: float
+      min: 1.5
+      max: 6.0
+      default: 3.0
+      description: "Take profit = ATR * multiplier"
+
+    max_hold_bars:
+      type: int
+      min: 4
+      max: 96
+      default: 24
+      description: "Force exit after N bars if neither SL nor TP hit"
+
+    trailing_stop_enabled:
+      type: bool
+      default: false
+
+    trailing_stop_pct:
+      type: float
+      min: 0.005
+      max: 0.05
+      default: 0.015
+      condition: "trailing_stop_enabled == true"
+
+  feature_engineering:
+    use_regime_filter:
+      type: bool
+      default: false
+      description: "Only trade when ADX confirms trending regime"
+
+    regime_adx_threshold:
+      type: float
+      min: 15.0
+      max: 35.0
+      default: 25.0
+      condition: "use_regime_filter == true"
+
+    use_volatility_scaling:
+      type: bool
+      default: false
+      description: "Scale position size by inverse volatility"
+
+    volatility_lookback:
+      type: int
+      min: 10
+      max: 60
+      default: 20
+      condition: "use_volatility_scaling == true"
+
+  forbidden_changes:
+    - "Do not modify position sizing beyond volatility scaling"
+    - "Do not add leverage"
+    - "Do not modify hard stop loss logic in risk_core/"
+    - "Do not add pyramid / martingale entries"
+    - "Do not add correlated simultaneous signals on same symbol"

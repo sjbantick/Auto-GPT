@@ -1,0 +1,36 @@
+# Evaluation pipeline configuration
+
+fast_backtest:
+  days: 90
+  symbols: ["BTC/USDT"]
+  fee_pct: 0.0
+  slippage_pct: 0.0
+  timeout_seconds: 120
+
+robustness_backtest:
+  days: 730
+  symbols_file: "configs/symbols.yaml"
+  fee_pct: 0.001
+  slippage_pct: 0.0005
+  timeout_seconds: 600
+
+walkforward:
+  train_days: 90
+  test_days: 30
+  n_windows: 8
+  min_positive_windows_pct: 0.50
+
+paper_stage:
+  duration_days: 30
+  latency_ms: 200
+  slippage_model: "linear"
+
+probation:
+  duration_days: 14
+  max_position_usd: 100
+  max_loss_usd: 50
+  auto_demote_on_breach: true
+
+loop:
+  max_iterations: 10
+  dry_run: false
